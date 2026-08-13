@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-const apiBaseUrl = import.meta.env.VITE_CODESPACE_NAME
-  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev`
-  : 'http://localhost:8000';
+const apiUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? 'https://refactored-winner-4vvvgqrvvqq3q649-8000.app.github.dev/api/activities/'
+  : 'http://localhost:8000/api/activities/';
 
 const getItems = (payload) => {
   if (Array.isArray(payload)) return payload;
@@ -19,7 +19,7 @@ export default function Activities() {
   useEffect(() => {
     async function fetchActivities() {
       try {
-        const response = await fetch(`${apiBaseUrl}/api/activities/`);
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`);
         }
