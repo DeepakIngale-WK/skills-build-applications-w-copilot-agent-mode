@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 
-const getApiBaseUrl = () => {
-  const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
-  return codespaceName ? `https://${codespaceName}-8000.app.github.dev` : 'http://localhost:8000';
-};
+const apiBaseUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev`
+  : 'http://localhost:8000';
 
 const getItems = (payload) => {
   if (Array.isArray(payload)) return payload;
@@ -20,7 +19,7 @@ export default function Teams() {
   useEffect(() => {
     async function fetchTeams() {
       try {
-        const response = await fetch(`${getApiBaseUrl()}/api/teams/`);
+        const response = await fetch(`${apiBaseUrl}/api/teams/`);
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`);
         }
